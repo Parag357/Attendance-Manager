@@ -76,6 +76,7 @@ header("location:Attendance_Update.php");
 }
 ?>
 <body>
+<br /><br />
   <div class="container">
         <div class="row no-gutters">
             <div class="col-md-12" >
@@ -183,7 +184,7 @@ $err="Attendance records not inserted yet.";
  <div class="container">
         <div class="row no-gutters">
             <div class="col-md-5" >
-                <div class="content jumbotron mb-5 bg-dark" >
+                <div class="content jumbotron mb-5" >
 				<table class=" table table-stripped table-responsive">
 				<tr><th colspan="3"><h1 class=" display-4 badge-danger">
 				  <center>Defaulters-1</center></b></h1></th></tr>
@@ -216,7 +217,7 @@ $err="Attendance records not inserted yet.";
 				<div class="col-md-2">
 				</div>
 				<div class="col-md-5" >
-                <div class="content jumbotron mb-5 bg-dark" >
+                <div class="content jumbotron mb-5" >
 				<table class=" table table-stripped table-responsive">
 				<tr><th colspan="3"><h1 class="display-4 badge-danger"><center>Defaulters-2</center></b></h1></th></tr>
 				<tr><th colspan="3"><h4 align="center" class="display-7">Attendance less than 50%</b></h4></th></tr>

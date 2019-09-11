@@ -39,6 +39,7 @@
 include "conn.php";
 session_start();
 $id=$_SESSION['id'];
+//echo "The Id is \t".$id;
 $cmd="select * from profile where id='$id'";
 $err="";
 //echo $cmd;
@@ -217,12 +218,22 @@ header("location:display.php");
 }
 if(isset($_POST['logout']))
 {
-if(session_destroy())
-{
+//sleep(2);
+if (isset($_SERVER['HTTP_COOKIE'])) {
+    $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+	//print_r($cookies);
+    foreach($cookies as $cookie) {
+        $ck_parts = explode('=', $cookie);
+        $ck_name = trim($ck_parts[0]);
+        setcookie($ck_name, '', time()-1000);
+        setcookie($ck_name, '', time()-1000, '/');
+    }
+session_destroy();
 header("location:login.php");
 }
 }
 ?>
+<br /><br />
    <div class="container">
         <div class="row no-gutters">
             <div class="col-md-12">

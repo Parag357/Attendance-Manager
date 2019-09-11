@@ -5,10 +5,21 @@ $user_id=$password=$uid=$pwd=$err="";
  
 if(isset($_POST['rem'])) # the value of checkbox is used
 {
+if(empty($_POST['uid']))
+{
+$err="please enter the user-ID";
+}
+elseif(empty($_POST['pwd']))
+{
+$err="please enter a password";
+}
+else
+{
 $user_id=$_POST['uid'];
 $password=$_POST['pwd'];
 setcookie("user",$user_id,time()+(86400*30),"/");
 setcookie("password",$password,time()+(86400*30),"/");
+}
 }
 if(isset($_COOKIE['user'])&& isset($_COOKIE['password']))
 {
@@ -36,7 +47,7 @@ $err="please enter the user-ID";
 }
 elseif(empty($_POST['pwd']))
 {
-$err="please enter a password";
+$err="please enter the password";
 
 }
 else
