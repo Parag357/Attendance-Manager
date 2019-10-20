@@ -95,9 +95,9 @@ $old=$new=$cnf="";
 <table class="table responsive table table-stripped">
 <tr><th colspan="3" align="center"> <center><img src="assets/images/logo.png" alt="logo" width="120"height="120"></center></th></tr>
 <tr><th colspan="3"><h3 style="font-size:medium"><center>Please create a strong password between 8-16 characters using uppercase, special characters and numbers<br /></center></h3></th></tr>
-<tr><td>Current password</td><td colspan="2"><input type="text" name="old" value="<?php echo $old; ?>" placeholder="Enter current password" /></td></tr>
-<tr><td>New password</td><td colspan="2"><input type="text" name="new" value="<?php echo $new; ?>"  placeholder="Enter new password" /></td></tr>
-<tr><td>Confirm new password</td><td colspan="2"><input type="text" name="cnf" value="<?php echo $cnf; ?>"  placeholder="Confirm new password" /></td></tr>
+<tr><td>Current password</td><td colspan="2"><input type="password" name="old" value="<?php echo $old; ?>" placeholder="Enter current password" /></td></tr>
+<tr><td>New password</td><td colspan="2"><input type="password" name="new" value="<?php echo $new; ?>"  placeholder="Enter new password" /></td></tr>
+<tr><td>Confirm new password</td><td colspan="2"><input type="password" name="cnf" value="<?php echo $cnf; ?>"  placeholder="Confirm new password" /></td></tr>
 <tr><td colspan="3" align="center"><span style="color:#FF0000"><?php echo $err; ?></span></td></tr>
 <tr><td><input type="submit" class="btn btn-dark" name="back" value="Back"/></td><td>
   <input type="submit" class="btn btn-dark" name="reset" value="Reset" <?php echo $btn_status;?> />

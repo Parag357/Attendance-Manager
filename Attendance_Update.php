@@ -190,8 +190,8 @@ header("location:welcome.php");
 }
 ?>
 <tr><td colspan="5" align="center"><span style="color:#FF0000"><?php echo $err1; ?></span></td></tr>
-<tr><td><input type="submit" class="btn btn-danger" name="logout" value="LogOut" /></td><td><input type="submit" class="btn btn-dark" name="back" value="Back" /></td><td>
-  <input type="submit" class="btn btn-dark" name="reset" value="Reset" /></td><td><input type="submit" class="btn btn-dark" name="submit" value="OK" /></td><td><input type="submit" class="btn btn-dark" name="details" value="Logs" /></td></tr>
+<tr><td><input type="submit" class="btn btn-danger" name="logout" value="LogOut" /></td><td><input type="submit" class="btn btn-dark" name="back" value="Back"/></td><td>
+  <input type="submit" class="btn btn-dark" name="reset" value="Reset" /></td><td><input type="submit" class="btn btn-dark" name="submit" value="OK" onclick="return confirm ('Do you want to submit ?')"/></td><td><input type="submit" class="btn btn-dark" name="details" value="Logs" /></td></tr>
 </table>
 </form>
                   </div>

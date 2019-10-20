@@ -3,7 +3,7 @@
 <?php
 $user_id=$password=$uid=$pwd=$err="";
  
-if(isset($_POST['rem'])) # the value of checkbox is used
+/*if(isset($_POST['rem'])) # the value of checkbox is used
 {
 if(empty($_POST['uid']))
 {
@@ -25,7 +25,7 @@ if(isset($_COOKIE['user'])&& isset($_COOKIE['password']))
 {
 $uid=$_COOKIE['user'];
 $pwd=$_COOKIE['password'];
-}
+}*/
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -43,17 +43,23 @@ if(isset($_POST['submit']))
 if(empty($_POST['uid']))
 {
 $err="please enter the user-ID";
-
 }
 elseif(empty($_POST['pwd']))
 {
 $err="please enter the password";
-
+}
+else if(!preg_match("/^(?=.*\d).{1,5}$/",$_POST['uid']))// validation of name format 
+{
+$err="either of the above is incorrect";
+}
+else if(!preg_match("/^((?=.*\d)(?=.*[a-z]).{6,20})$/",$_POST['pwd']))// validation of password format 
+{
+$err="either of the above is incorrect";
 }
 else
 {
-$uid=$_POST['uid'];
-$pwd=$_POST['pwd'];
+$uid=secure($_POST['uid']);
+$pwd=secure($_POST['pwd']);
 $cmd="select * from profile where id='$uid' and password='$pwd'";
 $res=mysqli_query($con,$cmd);
 if(mysqli_num_rows($res)>0)
@@ -97,6 +103,11 @@ header('location:newpass.php');
 }
 }
 }
+function secure($test)
+{
+$test=htmlspecialchars(stripslashes(trim($test)));
+return $test;
+}
 ?>
 <body>
 <br /><br />
@@ -113,11 +124,11 @@ header('location:newpass.php');
 <table align="center" class="align-self-center">
 <tr><th colspan="4" align="center"> <center><img src="assets/images/logo.png" alt="logo" width="120"height="120"></center></th></tr>
 <tr><td colspan="4"><br /></td></tr>
-<tr><th colspan="4"><h1 class="display-4"><u><center>Log-In<br /></center></u></h1></th></tr>
+<tr><th colspan="4"><h1 class="display-4"><center>Portal<br /></center></h1></th></tr>
 <tr><td colspan="4"><br /></td></tr>
 <tr><td>ID</td><td colspan="3"><input type="text" name="uid" value="<?php echo $uid; ?>" placeholder="Enter ID" /></td></tr>
 <tr><td colspan="4"><br /></td></tr>
-<tr><td>Password</td><td><input type="password" name="pwd" value="<?php echo $pwd; ?>" placeholder="Enter password" /></td><td><center><input type="checkbox" name="rem" class="btn-lg"/></center></td><td>its me</td></tr>
+<tr><td>Password</td><td><input type="password" name="pwd" value="<?php echo $pwd; ?>" placeholder="Enter password" /></td><!--<td><center><input type="checkbox" name="rem" class="btn-lg"/></center></td><td>its me</td>--></tr>
 <tr><td colspan="4"><br /></td></tr>
 <tr><td colspan="4" align="center"><span style="color:#FF0000"><?php echo $err; ?></span></td></tr>
 <tr><td colspan="4"><br /></td></tr>
