@@ -8,32 +8,6 @@
     <link href="../hope/assets/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
      crossorigin="anonymous">
-	 <script type="text/javascript">
-	 function showall(str)
-   {
-      var xmlhttp;
-
-      if (window.XMLHttpRequest)
-      {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp=new XMLHttpRequest();
-      }
-      else
-      {// code for IE6, IE5
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-      }	
-
-      xmlhttp.onreadystatechange = function() {
-        if(xmlhttp.readyState == 4 && xmlhttp.status == 200)
-        {
-          document.getElementById("subjects").innerHTML = xmlhttp.responseText;
-        }
-      }
-	  
-	  xmlhttp.open("GET","load1.php?opt1="+str, true);
-      xmlhttp.send();
-  }
-  
-	 </script>
 </head>
 <?php
 include "conn.php";
@@ -74,59 +48,33 @@ header("location:login.php");
 $section=$branch=$semester=$subject="";
 if($_GET)
 {
-$section=$_GET['section'];
-$semester=$_GET['semester'];
-$branch=$_GET['branch'];
-$subject=$_GET['subject'];
+$arr=preg_split ("/\,/", $_get['info']); 
+$section=$arr[2];// taking values from splitted array
+$semester=$arr[3];
+$branch=$arr[1];
+$subject=$arr[0];
 }
 if(isset($_POST['submit1']))
 {
-$section=$_POST['section'];
+/*$section=$_POST['section'];
 $semester=$_POST['semester'];
 $branch=$_POST['branch'];
-$subject=$_POST['subject'];
-if($branch=="Branch")
+$subject=$_POST['subject'];*/
+if($_POST['info']=="Select")
 {
-$err="Please choose a branch !!";
-}
-else if($semester=="Semester")
-{
-$err="Please choose a semester !!";
-}
-else if($section=="Section")
-{
-$err="Please choose a section !!";
-}
-else if($subject=="Subject")
-{
-$err="Please choose a subject !!";
+$err="Please choose an option !!";
 }
 else
 {
+$arr=preg_split ("/\,/", $_POST['info']); 
+$section=$arr[2];// taking values from splitted array
+$semester=$arr[3];
+$branch=$arr[1];
+$subject=$arr[0];
 $_SESSION['section']=$section;
 $_SESSION['semester']= $semester;
 $_SESSION['subject']=$subject;
 $_SESSION['branch']= $branch;
-/*$_SESSION['tcode1']=$tcode1;
-$_SESSION['tcode2']=$tcode2;
-$_SESSION['tcode3']=$tcode3;
-$_SESSION['tcode4']=$tcode4;
-$_SESSION['tcode5']=$tcode5;
-$_SESSION['tcode6']=$tcode6;
-$_SESSION['tcode7']=$tcode7;
-*/
-$cmd="select tcode from course where branch='$branch' and section='$section' and semester='$semester' and subject='$subject'";
-$res=mysqli_query($con,$cmd);
-if(mysqli_num_rows($res)>0)
-{
-$row=mysqli_fetch_array($res);
-$tcode=$row['tcode'];
-if(($tcode!=$tcode1)&&($tcode!=$tcode2)&&($tcode!=$tcode3)&&($tcode!=$tcode4)&&($tcode!=$tcode5)&&($tcode!=$tcode6)&&($tcode!=$tcode7))
-{
-$err="Invalid selections";
-}
-else
-{
 $cmd="select count(date) as 'counttime' from manage where subject='$subject' and branch='$branch' and section='$section' and semester='$semester'";
 $res3=mysqli_query($con,$cmd);
 //var_dump($res);
@@ -160,60 +108,25 @@ else
 header("location:Attendance_Update.php");
 }
 }
-}
-}
 if(isset($_POST['submit2']))
 {
-$section=$_POST['section'];
-$semester=$_POST['semester'];
-$branch=$_POST['branch'];
-$subject=$_POST['subject'];
-if($branch=="Branch")
+if($_POST['info']=="Select")
 {
-$err="Please choose a branch !!";
-}
-else if($semester=="Semester")
-{
-$err="Please choose a semester !!";
-}
-else if($section=="Section")
-{
-$err="Please choose a section !!";
-}
-else if($subject=="Subject")
-{
-$err="Please choose a subject !!";
+$err="Please choose an option !!";
 }
 else
 {
+$arr=preg_split ("/\,/", $_POST['info']); 
+$section=$arr[2];// taking values from splitted array
+$semester=$arr[3];
+$branch=$arr[1];
+$subject=$arr[0];
 $_SESSION['section']=$section;
 $_SESSION['semester']= $semester;
 $_SESSION['subject']=$subject;
 $_SESSION['branch']= $branch;
-/*$_SESSION['tcode1']=$tcode1;
-$_SESSION['tcode2']=$tcode2;
-$_SESSION['tcode3']=$tcode3;
-$_SESSION['tcode4']=$tcode4;
-$_SESSION['tcode5']=$tcode5;
-$_SESSION['tcode6']=$tcode6;
-$_SESSION['tcode7']=$tcode7;
-*/
-$cmd="select tcode from course where branch='$branch' and section='$section' and semester='$semester' and subject='$subject'";
-$res=mysqli_query($con,$cmd);
-if(mysqli_num_rows($res)>0)
-{
-$row=mysqli_fetch_array($res);
-$tcode=$row['tcode'];
-if(($tcode!=$tcode1)&&($tcode!=$tcode2)&&($tcode!=$tcode3)&&($tcode!=$tcode4)&&($tcode!=$tcode5)&&($tcode!=$tcode6)&&($tcode!=$tcode7))
-{
-$err="Invalid selections";
-}
-else
-{
 $_SESSION['back_status']=0;
 header("location:display.php");
-}
-}
 }
 }
 if(isset($_POST['logout']))
@@ -267,65 +180,31 @@ header("location:login.php");
                           </div>
                       </div>
 					  </div></div></div>
-			<div class="col-md-1">
+			<div class="col-md-3">
 			</div>
-			<div class="col-md-6">
-                	<div class="content jumbotron mb-5">
+			<div class="col-md-4">
+                	<div class="content jumbotron mb-2">
 						<div class="row no-gutters" >
                     		<div class="col-md-12" >
-                      <table class=" table table-stripped table-responsive""align="left">
-					  <tr><th colspan="4"><h4 class="table-dark display-4"><center>Attendance</center> </h4></th></tr>
-					  <tr><td> <select name="branch" onchange="showall(this.value,0)">
-                   <option value="Branch">Branch</option>
+                      <table class=" table table-stripped table-responsive">
+					  <tr><th colspan="3"><h4 class="table-dark display-4"><center>Attendance</center> </h4></th></tr>
+					  <tr><td colspan="3" align="center"> <select name="info">
+                   <option value="Select">Select</option>
 				   <?php
-				   $cmd="select distinct branch from course";
-					//echo $cmd;
+				   $cmd="select branch,semester,section, subject from course where tcode in($tcode1,$tcode2,$tcode3,$tcode4,$tcode5,$tcode6,$tcode7)";
 					$res=mysqli_query($con,$cmd);
 					if(mysqli_num_rows($res)>0)
 					{
 					while($row=mysqli_fetch_array($res))  // loop runs till the last row
 					{
-					echo '<option value="'.$row['branch'].'">'.$row['branch'].'</option>';
+					echo '<option value="'.$row['subject'].','.$row['branch'].','.$row['section'].','.$row['semester'].'">'.$row['subject'].' : '.$row['branch'].' - '.$row['section'].' , sem '.$row['semester'].'</option>';
 					}
 					}
 				   ?>
-				   </select></td>
-				   <td> <select name="semester">
-                   <option value="Semester">Semester</option>
-				    <?php
-				   $cmd="select distinct semester from course";
-					//echo $cmd;
-					$res=mysqli_query($con,$cmd);
-					if(mysqli_num_rows($res)>0)
-					{
-					while($row=mysqli_fetch_array($res))  // loop runs till the last row
-					{
-					echo '<option value="'.$row['semester'].'">'.$row['semester'].'</option>';
-					}
-					}
-				   ?>
-				   </select></td>
-				   <td> <select name="section">
-                   <option value="Section">Section</option>
-				    <?php
-				   $cmd="select distinct section from course";
-					//echo $cmd;
-					$res=mysqli_query($con,$cmd);
-					if(mysqli_num_rows($res)>0)
-					{
-					while($row=mysqli_fetch_array($res))  // loop runs till the last row
-					{
-					echo '<option value="'.$row['section'].'">'.$row['section'].'</option>';
-					}
-					}
-				   ?>
-				   </select></td>
-				   <td> <select name="subject"id="subjects">
-                   <option value="Subject">Subject</option>
 				   </select></td>
 				   </tr>
-				   <tr><td colspan="4" align="center"><span style="color:#FF0000"><?php echo $err; ?></span></td></tr>
-				   <tr><td><input type="submit" class="btn btn-dark" name="submit1" value="Update" /></td><td colspan="2" align="center"><input type="submit" class="btn btn-dark" name="submit2" value="Track Logs" /></td><td align="center" ><input type="submit" class="btn btn-danger" name="logout" value="LogOut" /></td></tr>
+				   <tr><td colspan="3" align="center"><span style="color:#FF0000"><?php echo $err; ?></span></td></tr>
+				   <tr><td><input type="submit" class="btn btn-dark" name="submit1" value="Update" /></td><td><input type="submit" class="btn btn-dark" name="submit2" value="Logs" /></td><td><input type="submit" class="btn btn-danger" name="logout" value="LogOut" /></td></tr>
 					  </table>
 					  </form>
 					  </div>
