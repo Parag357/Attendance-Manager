@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -106,7 +105,6 @@ while($row=mysqli_fetch_array($res))  // loop runs till the last row
 echo '<th><h5 class="display-7"><center>'.$row['date'].'</center></h5></th>';
 }
 }
-;
 ?>
 <th colspan="3"><h4 class="display-7 table-dark" align="center">Total</h4></th></tr>
 <?php

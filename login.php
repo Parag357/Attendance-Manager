@@ -1,7 +1,8 @@
  
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php
-$user_id=$password=$uid=$pwd=$err="";
+if(isset($_POST)){
+$user_id=$password=$uid=$pwd=$err=$user=$radio="";
  
 /*if(isset($_POST['rem'])) # the value of checkbox is used
 {
@@ -38,13 +39,19 @@ $pwd=$_COOKIE['password'];
 </head>
 <?php
 include "conn.php";
+$user="";
 if(isset($_POST['submit']))
 {
-if(empty($_POST['uid']))
+$user=$_POST['user'];
+if(empty($user))
+{
+$err="please select student or faculty";
+}
+else if(empty($_POST['uid']))
 {
 $err="please enter the user-ID";
 }
-elseif(empty($_POST['pwd']))
+else if(empty($_POST['pwd']))
 {
 $err="please enter the password";
 }
@@ -52,7 +59,7 @@ else if(!preg_match("/^(?=.*\d).{1,5}$/",$_POST['uid']))// validation of name fo
 {
 $err="either of the above is incorrect";
 }
-else if(!preg_match("/^((?=.*\d)(?=.*[a-z]).{6,20})$/",$_POST['pwd']))// validation of password format 
+else if(!preg_match("/^((?=.*\d)(?=.*[a-z]).{3,20})$/",$_POST['pwd']))// validation of password format 
 {
 $err="either of the above is incorrect";
 }
@@ -60,6 +67,25 @@ else
 {
 $uid=secure($_POST['uid']);
 $pwd=secure($_POST['pwd']);
+if($user=="student")
+{
+$cmd1="select * from student where stu_id= '$uid' and password='$pwd'";
+$res1=mysqli_query($con,$cmd1);
+if(mysqli_num_rows($res1)>0)
+{
+$row1=mysqli_fetch_array($res1);
+session_start();
+$_SESSION['id']=$row1['stu_id'];
+$_SESSION['password']=$row1['password'];
+header("location:studisplay.php");
+}
+else
+{
+$err="either of the above is incorrect";
+}
+}
+else
+{
 $cmd="select * from profile where id='$uid' and password='$pwd'";
 $res=mysqli_query($con,$cmd);
 if(mysqli_num_rows($res)>0)
@@ -76,6 +102,7 @@ $err="either of the above is incorrect";
 }
 }
 }
+}
 if (isset($_POST['reset']))
 {
 $uid=$pwd="";
@@ -83,13 +110,50 @@ $uid=$pwd="";
 // coding for password change
 if (isset($_POST['change']))
 {
-if(empty($_POST['uid']))
+$user=$_POST['user'];
+if(empty($user))
+{
+$err="please select student or faculty";
+}
+else if(empty($_POST['uid']))
 {
 $err="please enter the user-ID";
 }
+else if(empty($_POST['pwd']))
+{
+$err="please enter the password";
+}
+else if(!preg_match("/^(?=.*\d).{1,5}$/",$_POST['uid']))// validation of name format 
+{
+$err="either of the above is incorrect";
+}
+else if(!preg_match("/^((?=.*\d)(?=.*[a-z]).{3,20})$/",$_POST['pwd']))// validation of password format 
+{
+$err="either of the above is incorrect";
+}
 else
 {
-$uid=$_POST['uid'];
+$uid=secure($_POST['uid']);
+$pwd=secure($_POST['pwd']);
+if($user=="student")
+{
+$cmd1="select * from student where stu_id= '$uid' and password='$pwd'";
+$res1=mysqli_query($con,$cmd1);
+if(mysqli_num_rows($res1)>0)
+{
+$row1=mysqli_fetch_array($res1);
+session_start();
+$_SESSION['id']=$row1['stu_id'];
+$_SESSION['password']=$row1['password'];
+header("location:newpass.php");
+}
+else
+{
+$err="either of the above is incorrect";
+}
+}
+else
+{
 $cmd="select * from profile where id='$uid'";
 $res=mysqli_query($con,$cmd);
 if(mysqli_num_rows($res)>0)
@@ -100,6 +164,8 @@ $_SESSION['id']=$row['id'];
 $_SESSION['password']=$row['password'];
 //echo '<a href="newpass.php">change password</a>';
 header('location:newpass.php');
+}
+}
 }
 }
 }
@@ -123,16 +189,18 @@ return $test;
 ?>" method="post">
 <table align="center" class="align-self-center">
 <tr><th colspan="4" align="center"> <center><img src="assets/images/logo.png" alt="logo" width="120"height="120"></center></th></tr>
-<tr><td colspan="4"><br /></td></tr>
+<!--<tr><td colspan="4"><br /></td></tr>-->
 <tr><th colspan="4"><h1 class="display-4"><center>Portal<br /></center></h1></th></tr>
+<tr><td colspan="2"><input type="radio" name="user" value="student" <?php echo ($user=="student")?"checked":"";?> align="left"> Student</td>
+<td colspan="2"><input type="radio" name="user" value="faculty" <?php echo ($user=="faculty")?"checked":"";?> align="right"> Faculty</td></tr>
 <tr><td colspan="4"><br /></td></tr>
 <tr><td>ID</td><td colspan="3"><input type="text" name="uid" value="<?php echo $uid; ?>" placeholder="Enter ID" /></td></tr>
 <tr><td colspan="4"><br /></td></tr>
-<tr><td>Password</td><td><input type="password" name="pwd" value="<?php echo $pwd; ?>" placeholder="Enter password" /></td><!--<td><center><input type="checkbox" name="rem" class="btn-lg"/></center></td><td>its me</td>--></tr>
+<tr><td>Password</td><td colspan="3"><input type="password" name="pwd" value="<?php echo $pwd; ?>" placeholder="Enter password" /></td><!--<td><input type="checkbox" name="rem" class="btn-lg"/> its me</td>--></tr>
 <tr><td colspan="4"><br /></td></tr>
 <tr><td colspan="4" align="center"><span style="color:#FF0000"><?php echo $err; ?></span></td></tr>
 <tr><td colspan="4"><br /></td></tr>
-<tr><td align="right"	><input type="submit" class="btn btn-dark" name="reset" value="Reset" /></td><td align="center"><input type="submit" class="btn btn-dark" name="change" value="Change Password" /></td><td align="right"><input type="submit" class="btn btn-success" name="submit" value="Login" /></td></tr>
+<tr><td align="left"><input type="submit" class="btn btn-dark" name="reset" value="Reset" /></td><td><input type="submit" class="btn btn-dark" name="change" value="Change Password" /></td><td align="right"><input type="submit" class="btn btn-success" name="submit" value="Login" /></td></tr>
 </table>
 </form>
                         </div>
@@ -149,3 +217,5 @@ return $test;
 <script src="assets/js/bootstrap.js"></script>
 </body>
 </html>
+
+<?php echo $user;?>
