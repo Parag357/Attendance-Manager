@@ -85,7 +85,7 @@ header("location:Attendance_Update.php");
 <table class=" table table-stripped table-responsive" align="center">
 <tr><th align="center"><center><img src="assets/images/logo.png" width="100" height="100" /></center></th><th colspan="49" align="center"><h1 class="display-3">Attendance Logs</h1></th></tr>
 <tr><th colspan="50" align="center"><h1 class=" display-4 table-dark"><?php echo $subject." : ".$branch." - ".$section." ( semester - ".$semester." )"; ?></h1></th></tr>
-<tr><th colspan="2"><h4 class="display-7">RegNo.</h4></th>
+<tr><th colspan="2"><b>RegNo.</b></th>
 <?php
 $cmd="select distinct student_id from manage where branch='$branch' and section='$section' and subject='$subject' and semester='$semester'";
 $res=mysqli_query($con,$cmd);
@@ -102,7 +102,8 @@ if(mysqli_num_rows($res)>0)
 {
 while($row=mysqli_fetch_array($res))  // loop runs till the last row
 {
-echo '<th><h5 class="display-7"><center>'.$row['date'].'</center></h5></th>';
+$d=$row['date'];
+echo '<td><b><center>'.$d[8],$d[9].'/'.$d[5],$d[6].'/'.$d[2],$d[3].'</center></b></td>';
 }
 }
 ?>
@@ -130,7 +131,12 @@ if(mysqli_num_rows($res2)>0)
 {
 while($row2=mysqli_fetch_array($res2))  // loop runs till the last row
 {
-echo'<td  align="center">'.$row2['status'].'</td>';
+$status=$row2['status'];
+if($status=='present')
+	$status='prs';
+else
+	$status='abs';
+echo'<td><center>'.$status.'</center></td>';
 }
 $cmd="select count(status) as 'counttime' from manage where subject='$subject' and branch='$branch' and section='$section' and semester='$semester' and student_id='$id'";
 

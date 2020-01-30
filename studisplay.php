@@ -5,8 +5,7 @@
 <title>Welcome Student</title>
 <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link href="../hope/assets/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-     crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
 <?php
 include "conn.php";
@@ -40,10 +39,10 @@ header("location:login.php");
 					<form action="<?php echo $_SERVER['PHP_SELF'];
 						?>" method="post">
                        <table class="table-responsive">
-					   <tr> <td rowspan="2"><img src="assets/images/logo.png" width="120" height="120" /></td><td colspan="7"><h1 class="display-4">Welcome <?php  echo $name ;?></h1></td></tr>
-					   <tr><td><h1 class="font-italic table-dark"><?php  echo $branch ;?> - <?php  echo $section ;?> ( SEM : <?php echo $semester ;?> )</h1></td></tr></table>
+					   <tr> <td rowspan="2"><img src="assets/images/logo.png" width="120" height="120" /></td><td colspan="10"><h1 class="font-italic table-dark">Welcome <?php  echo $name ;?></h1></td></tr>
+					   <tr><td colspan="3"><h2 class="display-5"><?php  echo $branch ;?>-<?php  echo $section ;?> <b>|</b> sem-<?php echo $semester ;?></h2></td><td colspan="7" align ="right"><input type="submit" class="btn btn-danger" name="logout" value="LogOut" /></td></tr></table>
 <table class=" table table-stripped table-responsive" align="center">
-<tr><th colspan="50" align="center"><h1 class="display-3">Attendance Logs</h1></th></tr>
+<!--<tr><th colspan="50" align="center"><h1 class="display-3">Attendance Logs</h1></th></tr>-->
 <?php
 $cmd="select distinct(subject) from manage where student_id=$id";// change the static student id
 $res10=mysqli_query($con,$cmd);
@@ -56,7 +55,7 @@ while($row10=mysqli_fetch_array($res10))  // loop runs till the last row
 //}
 //}
 ?>
-<tr><th colspan="50" align="center"><h1 class="font-italic table-dark"><?php echo $row10['subject']?></h1></th></tr>
+<tr><th colspan="50" align="center"><h3 class="font-italic table-dark"><?php echo $row10['subject']?></h3></th></tr>
 <?php 
 $cmd1="select date from manage where subject= '".$row10['subject']."' and student_id=$id";// change the static values
 $res1=mysqli_query($con,$cmd1);
@@ -64,7 +63,8 @@ if(mysqli_num_rows($res1)>0)
 {
 while($row1=mysqli_fetch_array($res1))  // loop runs till the last row
 {
-echo '<th><h5 class="display-7"><center>'.$row1['date'].'</center></h5></th>';
+$d=$row1['date'];
+echo '<td><b>'.$d[8],$d[9].'/'.$d[5],$d[6].'/'.$d[2],$d[3].'</b></td>';
 }
 }
 ?>
@@ -82,7 +82,12 @@ if(mysqli_num_rows($res2)>0)
 {
 while($row2=mysqli_fetch_array($res2))  // loop runs till the last row
 {
-echo'<td  align="center">'.$row2['status'].'</td>';
+$status=$row2['status'];
+if($status=='present')
+	$status='prs';
+else
+	$status='abs';
+echo'<td  align="center">'.$status.'</td>';
 }
 $cmd="select count(status) as 'counttime' from manage where subject='".$row10['subject']."' and student_id=$id";// change the static values
 $res3=mysqli_query($con,$cmd);
@@ -113,7 +118,7 @@ $y++;
 }
 //echo $pr;
 }
-echo'<td class="table-dark"align="center">'.$pr.'/'.$tot.'=<b>'.$prc.'%</b>'.'</td></tr>';
+echo'<td class="table-dark"><center>'.$pr.'/'.$tot.'=<b>'.$prc.'%</b>'.'</center></td></tr>';
 }
 else
 {
@@ -130,8 +135,9 @@ header("location:login.php");
 }
 ?>
 </table>
-<table><tr><td colspan="100" align="right"><input type="submit" class="btn btn-danger" name="logout" value="LogOut" /></td></tr>
-</table></div></div></div></div>
+<!--<table><tr><td colspan="100" align="right"><input type="submit" class="btn btn-danger" name="logout" value="LogOut" /></td></tr>
+</table>-->
+</div></div></div></div>
 </form>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/jquery-3.3.1.slim.min.js"></script>

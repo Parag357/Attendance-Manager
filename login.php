@@ -39,7 +39,7 @@ $pwd=$_COOKIE['password'];
 </head>
 <?php
 include "conn.php";
-$user="";
+$user="faculty";
 if(isset($_POST['submit']))
 {
 $user=$_POST['user'];
@@ -217,5 +217,3 @@ return $test;
 <script src="assets/js/bootstrap.js"></script>
 </body>
 </html>
-
-<?php echo $user;?>
