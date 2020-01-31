@@ -143,6 +143,7 @@ if(mysqli_num_rows($res1)>0)
 {
 $row1=mysqli_fetch_array($res1);
 session_start();
+$_SESSION['user']=$user;
 $_SESSION['id']=$row1['stu_id'];
 $_SESSION['password']=$row1['password'];
 header("location:newpass.php");
@@ -160,10 +161,15 @@ if(mysqli_num_rows($res)>0)
 {
 $row=mysqli_fetch_array($res);
 session_start();
+$_SESSION['user']=$user;
 $_SESSION['id']=$row['id'];
 $_SESSION['password']=$row['password'];
 //echo '<a href="newpass.php">change password</a>';
 header('location:newpass.php');
+}
+else
+{
+$err="either of the above is incorrect";
 }
 }
 }

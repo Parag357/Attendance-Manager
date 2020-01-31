@@ -13,13 +13,26 @@ session_start();
 $c=0;
 include "conn.php";
 $id=$oldcnf="";
+$user=$_SESSION['user'];
 $id=$_SESSION['id'];
 $oldcnf=$_SESSION['password'];
+if($user=='faculty')
+{
 $cmd="select * from profile where id='$id'";
 $res=mysqli_query($con,$cmd);
 if(!(mysqli_num_rows($res)>0))
 {
 header("location:login.php");
+}
+}
+else
+{
+$cmd="select * from student where stu_id='$id'";
+$res=mysqli_query($con,$cmd);
+if(!(mysqli_num_rows($res)>0))
+{
+header("location:login.php");
+}
 }
 ?>
 </head>
@@ -51,17 +64,19 @@ else if($oldcnf!=$old)
 {
 $err="old password mismatch";
 }
- else if($cnf!=$new)
+else if($cnf!=$new)
 {
 $err="new password mismatch";
 }
- else if($old==$new)
+else if($old==$new)
 {
 $err="nothing to update";
 }
 else
 {
 //$new=sha1($new);
+if($user=='faculty')
+{
 $cmd="update profile set password='$new' where id= $id";
 if(mysqli_query($con,$cmd))
 {
@@ -72,6 +87,21 @@ $old=$cnf=$new="";
 else
 {
 $err="error in updation ";
+}
+}
+else
+{
+$cmd="update student set password='$new' where stu_id= $id";
+if(mysqli_query($con,$cmd))
+{
+echo "<script>alert('password updated successfully')</script>";
+$btn_status="disabled";
+$old=$cnf=$new="";
+}
+else
+{
+$err="error in updation ";
+}
 }
 }
 }
