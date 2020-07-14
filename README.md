@@ -1,5 +1,5 @@
 # Attendance-Manager
-a simple attendance manager and tracker made with php,html,css,js and bootstrap
+a web application featuring subject-wise attendance tracking for students and attendance management for teachers of an institution. 
 
 # Screenshots
 
