@@ -206,7 +206,7 @@ return $test;
 <tr><td colspan="4"><br /></td></tr>
 <tr><td colspan="4" align="center"><span style="color:#FF0000"><?php echo $err; ?></span></td></tr>
 <tr><td colspan="4"><br /></td></tr>
-<tr><td align="left"><input type="submit" class="btn btn-dark" name="reset" value="Reset" /></td><td><input type="submit" class="btn btn-dark" name="change" value="Change Password" /></td><td align="right"><input type="submit" class="btn btn-success" name="submit" value="Login" /></td></tr>
+<tr><td align="left"><input type="reset" class="btn btn-dark" name="reset" value="Reset" /></td><td><input type="submit" class="btn btn-dark" name="change" value="Change Password" /></td><td align="right"><input type="submit" class="btn btn-success" name="submit" value="Login" /></td></tr>
 </table>
 </form>
                         </div>
