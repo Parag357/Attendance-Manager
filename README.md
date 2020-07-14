@@ -6,3 +6,7 @@ a simple attendance manager and tracker made with php,html,css,js and bootstrap
 Login portal
 
 ![](assets/images/login.png)
+
+Homepage for teachers
+
+![](assets/images/welcome.png)
