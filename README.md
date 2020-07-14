@@ -19,6 +19,6 @@ Attendance records of a class alongwith the list of defaulters (for teachers)
 
 ![](assets/images/display1.png)
 
-Homepage for teachers
+Subject wise attendance records (for student)
 
-![](assets/images/welcome.png)
+![](assets/images/display2.png)
