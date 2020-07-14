@@ -15,9 +15,9 @@ Attendance Insertion by teachers
 
 ![](assets/images/sheet.png)
 
-Homepage for teachers
+Attendance records of a class alongwith the list of defaulters (for teachers)
 
-![](assets/images/welcome.png)
+![](assets/images/display1.png)
 
 Homepage for teachers
 
