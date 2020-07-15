@@ -3,6 +3,10 @@ a web application featuring subject-wise attendance tracking for students and at
 
 # Screenshots
 
+Overview
+
+![](assets/images/poster.jpg)
+
 Login portal
 
 ![](assets/images/login.png)
