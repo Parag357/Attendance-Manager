@@ -14,11 +14,11 @@ a web application featuring subject-wise attendance tracking for students and at
 
 <b>Homepage for teachers</b>
 
-![](assets/images/welcome.png)
+<img src="./assets/images/welcome.png" alt="thome"/>
 
 <b>Attendance Insertion by teachers</b>
 
-![](assets/images/sheet.png)
+<img src="./assets/images/sheet.png" alt="insert" width="30%" height="auto"/>
 
 <b>Attendance records of a class alongwith the list of defaulters (for teachers)</b>
 
