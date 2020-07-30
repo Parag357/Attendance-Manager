@@ -6,7 +6,7 @@ a web application featuring subject-wise attendance tracking for students and at
 
 <b>Overview</b>
 
-![](assets/images/poster.jpg)
+<img src="./assets/images/poster.jpg" alt="poster" width="70%" height="auto"/>
 
 <b>Login portal</b>
 
