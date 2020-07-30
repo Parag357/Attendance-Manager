@@ -10,7 +10,7 @@ a web application featuring subject-wise attendance tracking for students and at
 
 <b>Login portal</b>
 
-<img src="./assets/images/login.png" alt="login" width="50%" height="auto"/>
+<img src="./assets/images/login.png" alt="login" width="30%" height="auto"/>
 
 <b>Homepage for teachers</b>
 
