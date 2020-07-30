@@ -1,4 +1,5 @@
 # Attendance-Manager
+
 a web application featuring subject-wise attendance tracking for students and attendance management for teachers of an institution. 
 
 # Screenshots
@@ -9,7 +10,7 @@ a web application featuring subject-wise attendance tracking for students and at
 
 <b>Login portal</b>
 
-![](assets/images/login.png)
+<img src="./assets/images/login.png" alt="login" width="50%" height="auto"/>
 
 <b>Homepage for teachers</b>
 
