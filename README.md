@@ -3,26 +3,26 @@ a web application featuring subject-wise attendance tracking for students and at
 
 # Screenshots
 
-Overview
+<b>Overview</b>
 
 ![](assets/images/poster.jpg)
 
-Login portal
+<b>Login portal</b>
 
 ![](assets/images/login.png)
 
-Homepage for teachers
+<b>Homepage for teachers</b>
 
 ![](assets/images/welcome.png)
 
-Attendance Insertion by teachers
+<b>Attendance Insertion by teachers</b>
 
 ![](assets/images/sheet.png)
 
-Attendance records of a class alongwith the list of defaulters (for teachers)
+<b>Attendance records of a class alongwith the list of defaulters (for teachers)</b>
 
 ![](assets/images/display1.png)
 
-Subject wise attendance records (for student)
+<b>Subject wise attendance records (for student)</b>
 
 ![](assets/images/display2.png)
