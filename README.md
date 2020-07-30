@@ -18,12 +18,12 @@ a web application featuring subject-wise attendance tracking for students and at
 
 <b>Attendance Insertion by teachers</b>
 
-<img src="./assets/images/sheet.png" alt="insert" width="30%" height="auto"/>
+<img src="./assets/images/sheet.png" alt="insert" width="40%" height="auto"/>
 
 <b>Attendance records of a class alongwith the list of defaulters (for teachers)</b>
 
-![](assets/images/display1.png)
+<img src="./assets/images/display1.png" alt="tdisplay" width="70%" height="auto"/>
 
 <b>Subject wise attendance records (for student)</b>
 
-![](assets/images/display2.png)
+<img src="./assets/images/display2.png" alt="sdisplay"/>
