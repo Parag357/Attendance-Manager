@@ -4,6 +4,8 @@ a web application featuring subject-wise attendance tracking for students and at
 
 # Screenshots
 
+<p align="center">
+  
 <b>Overview</b>
 
 <img src="./assets/images/poster.jpg" alt="poster" width="70%" height="auto"/>
@@ -27,3 +29,5 @@ a web application featuring subject-wise attendance tracking for students and at
 <b>Subject wise attendance records (for student)</b>
 
 <img src="./assets/images/display2.png" alt="sdisplay"/>
+
+</p>
